@@ -39,7 +39,6 @@ function App() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
-        return jwt
         .then((res) => {
           if (res) {
             api = new Api({
@@ -182,22 +181,26 @@ function App() {
   }
 
   React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cards) => {
-        setCards(cards)
-      })
-      .catch((err) => console.log(err));
+    if (api) {
+      api
+        .getInitialCards()
+        .then((cards) => {
+          setCards(cards)
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((user) => {
-        console.log(user)
-        setCurrentUser(user);
-      })
-      .catch((err) => console.log(err));
+    if (api) {
+      api
+        .getUserInfo()
+        .then((user) => {
+          console.log(user)
+          setCurrentUser(user);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   React.useEffect(() => {
