@@ -12,7 +12,7 @@ import Login from "./Login";
 import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
 import ProtectedRoute from "./ProtectedRoute";
-import { api } from "../utils/api";
+import { Api } from "../utils/api";
 import { register, authorize, checkToken } from "../utils/authApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -34,12 +34,20 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [success, setSuccess] = React.useState(false);
 
+  let api
   function handleTokenCheck() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
+        return jwt
         .then((res) => {
           if (res) {
+            api = new Api({
+              baseUrl: "https://api.tkozlova.nomoredomains.xyz",
+              headers: {
+                authorization: jwt,
+              },
+            });
             setLoggedIn(true);
             setCurrentEmail(res.data.email);
             history.push("/");

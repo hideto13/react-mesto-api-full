@@ -1,4 +1,4 @@
-class Api {
+export class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -64,19 +64,6 @@ class Api {
     }).then((res) => this._getResponseData(res));
   }
 
-  // addLike(id) {
-  //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //   }).then((res) => this._getResponseData(res));
-  // }
-
-  // deleteLike(id) {
-  //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-  //     method: "DELETE",
-  //     headers: this._headers,
-  //   }).then((res) => this._getResponseData(res));
-  // }
 
   changeLikeCardStatus(id, notLiked) {
     if (notLiked) {
@@ -92,11 +79,3 @@ class Api {
     }
   }
 }
-
-export const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-33",
-  headers: {
-    authorization: "f7bab5a6-9ad0-4af8-99cf-913958ad451d",
-    "Content-Type": "application/json",
-  },
-});
