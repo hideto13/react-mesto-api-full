@@ -1,0 +1,9 @@
+.card {
+  font-family: 'Inter', Arial, sans-serif;
+  max-width: 282px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+  position: relative;
+}

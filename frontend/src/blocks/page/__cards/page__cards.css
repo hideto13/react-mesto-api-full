@@ -1,0 +1,15 @@
+.page__cards {
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .page__cards {
+    max-width: 581px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page__cards {
+    max-width: 282px;
+  }
+}

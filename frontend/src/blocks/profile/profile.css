@@ -1,0 +1,15 @@
+.profile {
+  color:white;
+  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0 51px;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .profile {
+    flex-direction: column;
+    padding-bottom: 36px;
+  }
+}
