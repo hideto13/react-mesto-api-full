@@ -33,29 +33,30 @@ function App() {
   const [currentEmail, setCurrentEmail] = React.useState("");
   const [cards, setCards] = React.useState([]);
   const [success, setSuccess] = React.useState(false);
+  const [api, setApi] = React.useState();
 
-  let api
   function handleTokenCheck() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
         .then((res) => {
           if (res) {
-            api = new Api({
+            setApi(new Api({
               baseUrl: "https://api.tkozlova.nomoredomains.xyz",
               headers: {
-                authorization: jwt,
+                authorization: `Bearer ${jwt}`,
               },
-            });
+            }));
             setLoggedIn(true);
-            setCurrentEmail(res.data.email);
+            console.log(res)
+            setCurrentEmail(res.email);
             history.push("/");
           }
         })
         .catch((err) => console.log(err));
     }
   }
-
+ console.log(api)
   function onRegister({ email, password }) {
     register({
       email,
@@ -189,7 +190,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [api]);
 
   React.useEffect(() => {
     if (api) {
@@ -201,7 +202,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [api]);
 
   React.useEffect(() => {
     handleTokenCheck();
