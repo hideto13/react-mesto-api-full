@@ -57,6 +57,8 @@ function App() {
       baseUrl: "https://api.tkozlova.nomoredomains.xyz",
       headers: {
         authorization: `Bearer ${jwt}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     }));
   }
