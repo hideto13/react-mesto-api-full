@@ -25,12 +25,14 @@ router.patch('/me', celebrate({
   }),
 }), updateUser);
 
-router.patch('/me/avatar',
-//   celebrate({
-//   body: Joi.object().keys({
-//     avatar: Joi.string().required().pattern(/https*:\/\/(www.)?([A-Za-z0-9]{1}[A-Za-z0-9-]*\.?)*\.{1}[A-Za-z0-9-]{2,8}(\/([\w#!:.?+=&%@!\-/])*)?/),
-//   }),
-// }),
-  updateAvatar);
+router.patch(
+  '/me/avatar',
+  celebrate({
+    body: Joi.object().keys({
+      avatar: Joi.string().required().pattern(/https*:\/\/(www.)?([A-Za-z0-9]{1}[A-Za-z0-9-]*\.?)*\.{1}[A-Za-z0-9-]{2,8}(\/([\w#!:.?+=&%@!\-/])*)?/),
+    }),
+  }),
+  updateAvatar,
+);
 
 module.exports = router;
