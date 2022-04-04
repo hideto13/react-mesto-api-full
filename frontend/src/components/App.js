@@ -41,12 +41,7 @@ function App() {
       checkToken(jwt)
         .then((res) => {
           if (res) {
-            setApi(new Api({
-              baseUrl: "https://api.tkozlova.nomoredomains.xyz",
-              headers: {
-                authorization: `Bearer ${jwt}`,
-              },
-            }));
+            addApi(jwt)
             setLoggedIn(true);
             console.log(res)
             setCurrentEmail(res.email);
@@ -56,7 +51,16 @@ function App() {
         .catch((err) => console.log(err));
     }
   }
- console.log(api)
+
+  function addApi(jwt) {
+    setApi(new Api({
+      baseUrl: "https://api.tkozlova.nomoredomains.xyz",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    }));
+  }
+
   function onRegister({ email, password }) {
     register({
       email,
@@ -83,6 +87,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
+          addApi(data.token)
           setLoggedIn(true);
           setCurrentEmail(email);
           history.push("/");
