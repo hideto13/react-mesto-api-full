@@ -15,6 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Api } from "../utils/api";
 import { register, authorize, checkToken } from "../utils/authApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { BASE_URL } from '../utils/constants';
 
 function App() {
   const history = useHistory();
@@ -43,7 +44,6 @@ function App() {
           if (res) {
             addApi(jwt)
             setLoggedIn(true);
-            console.log(res)
             setCurrentEmail(res.email);
             history.push("/");
           }
@@ -54,7 +54,7 @@ function App() {
 
   function addApi(jwt) {
     setApi(new Api({
-      baseUrl: "https://api.tkozlova.nomoredomains.xyz",
+      baseUrl: BASE_URL,
       headers: {
         authorization: `Bearer ${jwt}`,
         Accept: "application/json",
@@ -167,7 +167,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
@@ -204,7 +204,6 @@ function App() {
       api
         .getUserInfo()
         .then((user) => {
-          console.log(user)
           setCurrentUser(user);
         })
         .catch((err) => console.log(err));

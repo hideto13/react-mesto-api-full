@@ -1,3 +1,5 @@
+export const BASE_URL =  "https://api.tkozlova.nomoredomains.xyz"
+
 export const params = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',

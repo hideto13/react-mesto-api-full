@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.tkozlova.nomoredomains.xyz";
+import { BASE_URL } from './constants';
 
 function _getResponseData(res) {
   if (!res.ok) {
